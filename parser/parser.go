@@ -50,7 +50,7 @@ func Parse(contentfile *string, targetfile *string, part int) (int,error){
 			continue
 		}
 		if (insideBlock){
-			if ( count <= part ){	
+			if ( count == part ){	
 				_, err := target.Write([]byte(line))
 				if err != nil {
 					log.Printf("Cannot write line %v in  file %v\n",
@@ -68,6 +68,48 @@ func Parse(contentfile *string, targetfile *string, part int) (int,error){
 				&targetfile)
 				return 0,err
 			}
+		}
+		
+    }
+
+	return count,nil
+}
+
+func ParseTextOutput(contentfile *string, part int) ( int,error){
+	content,err := os.Open(*contentfile)
+	if err != nil{
+		log.Printf("Cannot read file %v\n", &contentfile)
+		return 0,err
+	}
+	defer content.Close()
+	
+	fileScanner := bufio.NewScanner(content)
+	
+    fileScanner.Split(bufio.ScanLines)
+	
+	// Scan 1 -> count
+	count := 0
+	insideBlock := false
+    for fileScanner.Scan() {
+		line := fmt.Sprintln( fileScanner.Text())
+        if IsBegin(&line){
+			count += 1
+			insideBlock = true
+			continue
+		}
+        if IsEnd(&line){
+			insideBlock = false
+			continue
+		}
+		if (insideBlock){
+			if ( count <= part ){	
+				fmt.Print(line)
+				
+				continue
+			}
+			}else {
+				
+			fmt.Print(line)			
 		}
 		
     }
