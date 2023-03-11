@@ -36,7 +36,26 @@ func TestStep1(t *testing.T){
 	content, err := os.ReadFile(createdFile)
 	assert.NilError(t, err, "Parse should give not errors")
 	
+	assert.Equal(t, string(targetContent), string(content), "Content should match target")
 
+}
+
+func TestStep2(t *testing.T){
+	targetContent,err := os.ReadFile("./testdata/step2.txt")
+	if err != nil{
+		t.Log(err)
+		panic( "Testdata not supplied")
+	}
+
+	startFile := "testdata/given.txt"
+	createdFile := "testdata/test.txt"
+	count,err := parser.Parse(&startFile, &createdFile,2)
+	assert.NilError(t, err, "Parse should give not errors")
+	assert.Equal(t, 3, count, "Should count all begin/ends")
+
+	content, err := os.ReadFile(createdFile)
+	assert.NilError(t, err, "Parse should give not errors")
+	
 	assert.Equal(t, string(targetContent), string(content), "Content should match target")
 
 }

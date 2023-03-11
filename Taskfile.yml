@@ -1,9 +1,6 @@
 # https://taskfile.dev
-
+# Parser/steps
 version: '3'
-
-vars:
-  GREETING: Hello, World!
 
 tasks:
   test:
@@ -11,3 +8,18 @@ tasks:
     cmds:
       - go test -v ./...
     silent: true
+
+
+  install:
+    desc: install
+    deps: [build]
+    cmds:
+      - rm -f /usr/local/bin/step
+      - cp -pr dist/step /usr/local/bin/step
+    silent: false
+
+  build:
+    desc: build
+    cmds:
+      - go build -o dist/step main.go
+    silent: false

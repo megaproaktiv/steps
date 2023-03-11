@@ -1,11 +1,11 @@
 # Comment
-# begin:1
+#begin
 Step 1
-# end
-# begin:2
+#end
+#begin
 Step 2
-# end
-# begin:3
+#end
+#begin
 Step 3
-# end
+#end
 lorem ipso
