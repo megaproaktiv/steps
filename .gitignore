@@ -1,2 +1,3 @@
 .vscode
 parser/testdata/test.txt
+dist

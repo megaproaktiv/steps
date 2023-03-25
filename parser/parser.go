@@ -6,11 +6,13 @@ import (
 	"log"
 	"os"
 	"strings"
+
 )
 
 
 const begin = "#begin"
 const end = "#end"
+const ignore = "#ignore"
 
 // Parse
 // 		contentfile : filename
@@ -38,8 +40,17 @@ func Parse(contentfile *string, targetfile *string, part int) (int,error){
 	// Scan 1 -> count
 	count := 0
 	insideBlock := false
+	skipLine := false
     for fileScanner.Scan() {
 		line := fmt.Sprintln( fileScanner.Text())
+		if skipLine {
+			skipLine = false
+			continue
+		}
+		if IsIgnore(&line){
+			skipLine = true
+			continue
+		}
         if IsBegin(&line){
 			count += 1
 			insideBlock = true
@@ -123,4 +134,8 @@ func IsBegin(line *string) bool{
 }
 func IsEnd(line *string) bool{
 	return strings.HasPrefix(*line,end )
+}
+
+func IsIgnore(line *string) bool{
+	return strings.HasPrefix(*line,ignore )
 }
