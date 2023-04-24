@@ -15,7 +15,6 @@ Ignore next lines
 lorem ipso
 ```
 
-
 Call app:
 
 ```
