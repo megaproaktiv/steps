@@ -1,0 +1,266 @@
+direction: right
+
+classes: {
+  legend: {
+
+  }
+  pos1: {
+    top: 125
+    left: 0
+  }
+  pos2: {
+    top: 100
+    left: 200
+  }
+  pos3: {
+    top: 100
+    left: 450
+  }
+  pos4: {
+    top: 100
+    left: 700
+  }
+}
+
+console: AWS Management Console{
+  shape: image
+  icon: https://icons.terrastruct.com/aws%2FManagement%20&%20Governance%2FAWS-Management-Console.svg
+}
+
+cli: AWS CLI{
+  shape: image
+  icon: https://icons.terrastruct.com/aws%2FManagement%20&%20Governance%2FAWS-Command-Line-Interface.svg
+}
+
+sdk: AWS SDKs{
+shape: image
+icon: https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Tools-And-SDKs.svg
+}
+
+service: another aws service{
+  shape: image
+  icon: https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg
+}
+
+api: AWS service API endpoint{
+shape: image
+icon: https://icons.terrastruct.com/aws%2FNetworking%20&%20Content%20Delivery%2FAmazon-VPC_Endpoints_light-bg.svg
+}
+
+#begin 1
+console --> api
+cli --> api
+sdk --> api
+service -> api
+#end
+
+#begin 2
+cli --> sdk
+console --> sdk
+sdk --> api
+service --> sdk
+#end
+
+#begin 3
+
+explanation: |python
+aws s3api list-buckets
+| {
+  class: legend
+}
+
+user: User {
+  shape: person
+}
+user -> cli: call {
+  style.animated: true
+}
+cli --> sdk
+sdk --> api
+console.style.opacity: 0
+service.style.opacity: 0
+user.class: pos1
+cli.class: pos2
+sdk.class: pos3
+api.class: pos4
+#end
+
+
+#begin 4
+
+explanation: |python
+ response = client.list_buckets()
+| {
+  class: legend
+}
+
+user: User {
+  shape: person
+}
+user -> cli:  {
+  style.animated: false
+}
+cli --> sdk: call {
+  style.animated: true
+}
+
+sdk --> api:  {
+  style.animated: false
+}
+
+console.style.opacity: 0
+service.style.opacity: 0
+user.class: pos1
+cli.class: pos2
+sdk.class: pos3
+api.class: pos4
+#end
+
+#begin 5
+
+explanation: |python
+GET / HTTP/1.1
+Host: s3.amazonaws.com
+| {
+  class: legend
+}
+
+
+user: User {
+  shape: person
+}
+user -> cli:  {
+  style.animated: false
+}
+cli --> sdk:  {
+  style.animated: false
+}
+
+sdk --> api: call {
+  style.animated: true
+}
+
+console.style.opacity: 0
+service.style.opacity: 0
+user.class: pos1
+cli.class: pos2
+sdk.class: pos3
+api.class: pos4
+#end
+
+
+#begin 6
+
+explanation: |go
+HTTP/1.1 200
+<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+  <Buckets>
+    <Bucket>
+         <CreationDate>timestamp</CreationDate>
+         <Name>string</Name>
+  </Bucket>
+</Buckets>...
+| {
+  class: legend
+}
+
+
+user: User {
+  shape: person
+}
+user -> cli:  {
+  style.animated: false
+}
+cli --> sdk:  {
+  style.animated: false
+}
+
+ api -> sdk: response {
+  style.animated: true
+}
+
+console.style.opacity: 0
+service.style.opacity: 0
+user.class: pos1
+cli.class: pos2
+sdk.class: pos3
+api.class: pos4
+#end
+
+
+
+#begin 7
+
+explanation: |json
+{
+    "Buckets": [
+        {
+            "Name": "name",
+            "CreationDate": "2020-05-12T16:00:06+00:00"
+        },
+| {
+  class: legend
+}
+
+
+user: User {
+  shape: person
+}
+user -> cli:  {
+  style.animated: false
+}
+sdk --> cli: response {
+  style.animated: true
+}
+
+api-->sdk:  {
+  style.animated: false
+}
+
+console.style.opacity: 0
+service.style.opacity: 0
+user.class: pos1
+cli.class: pos2
+sdk.class: pos3
+api.class: pos4
+#end
+
+
+
+
+#begin 8
+
+explanation: |json
+{
+    "Buckets": [
+        {
+            "Name": "name",
+            "CreationDate": "2020-05-12T16:00:06+00:00"
+        },
+| {
+  class: legend
+}
+
+
+user: User {
+  shape: person
+}
+user <-- cli: response {
+  style.animated: true
+}
+sdk --> cli:  {
+  style.animated: false
+}
+
+api-->sdk:  {
+  style.animated: false
+}
+
+console.style.opacity: 0
+service.style.opacity: 0
+user.class: pos1
+cli.class: pos2
+sdk.class: pos3
+api.class: pos4
+#end

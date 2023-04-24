@@ -1,3 +1,5 @@
 .vscode
 parser/testdata/test.txt
 dist
+example/app.d2
+*.svg

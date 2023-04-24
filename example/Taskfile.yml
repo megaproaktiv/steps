@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  MODULE: interact
+  STEPS: 8
+  # Change to elk if you do not have tala
+  LAYOUT: tala
+
+tasks:
+  default:
+    desc: run exercise
+    cmds:
+      - d2 -l {{.LAYOUT}}  --watch app.d2 &
+      - step step {{.MODULE}}.d2 app.d2 {{.STEPS}}
+
+
+  kill:
+    desc: Kill background d2s
+    cmds:
+      - killall -HUP d2
