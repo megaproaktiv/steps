@@ -4,46 +4,62 @@ classes: {
   legend: {
 
   }
+  userclass: {
+    style.font-size: 23
+  }
+  icon {
+    width: 90
+  }
   pos1: {
     top: 125
-    left: 0
+    left: 50
+    width: 90
   }
   pos2: {
     top: 100
-    left: 200
+    left: 250
+    width: 90
   }
   pos3: {
     top: 100
-    left: 450
+    left: 500
+    width: 90
   }
   pos4: {
     top: 100
-    left: 700
+    left: 750
+    width: 90
   }
 }
 
-console: AWS Management Console{
+console: Console {
   shape: image
+  class: icon
   icon: https://icons.terrastruct.com/aws%2FManagement%20&%20Governance%2FAWS-Management-Console.svg
+
 }
 
-cli: AWS CLI{
+cli: CLI  {
   shape: image
+  class: icon
   icon: https://icons.terrastruct.com/aws%2FManagement%20&%20Governance%2FAWS-Command-Line-Interface.svg
 }
 
-sdk: AWS SDKs{
+sdk: AWS SDKs {
 shape: image
+class: icon
 icon: https://icons.terrastruct.com/aws%2FDeveloper%20Tools%2FAWS-Tools-And-SDKs.svg
 }
 
-service: another aws service{
+service: aws service {
   shape: image
+  class: icon
   icon: https://icons.terrastruct.com/aws%2F_Group%20Icons%2FAWS-Cloud-alt_light-bg.svg
 }
 
-api: AWS service API endpoint{
+api: API endpoint {
 shape: image
+class: icon
 icon: https://icons.terrastruct.com/aws%2FNetworking%20&%20Content%20Delivery%2FAmazon-VPC_Endpoints_light-bg.svg
 }
 
@@ -69,8 +85,9 @@ aws s3api list-buckets
   class: legend
 }
 
-user: User {
+user: " " {
   shape: person
+  class: userclass
 }
 user -> cli: call {
   style.animated: true
@@ -94,7 +111,7 @@ explanation: |python
   class: legend
 }
 
-user: User {
+user: " " {
   shape: person
 }
 user -> cli:  {
@@ -126,7 +143,7 @@ Host: s3.amazonaws.com
 }
 
 
-user: User {
+user: " " {
   shape: person
 }
 user -> cli:  {
@@ -166,7 +183,7 @@ HTTP/1.1 200
 }
 
 
-user: User {
+user: " " {
   shape: person
 }
 user -> cli:  {
@@ -204,7 +221,7 @@ explanation: |json
 }
 
 
-user: User {
+user: " " {
   shape: person
 }
 user -> cli:  {
@@ -243,7 +260,7 @@ explanation: |json
 }
 
 
-user: User {
+user: " " {
   shape: person
 }
 user <-- cli: response {

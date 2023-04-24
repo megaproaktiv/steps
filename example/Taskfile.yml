@@ -14,6 +14,7 @@ tasks:
     cmds:
       - d2 -l {{.LAYOUT}}  --watch app.d2 &
       - step step {{.MODULE}}.d2 app.d2 {{.STEPS}}
+      - killall -HUP d2
 
 
   kill:
